@@ -15,7 +15,7 @@ router.post("/login", async (req, res) => {
     try{
         const hasmatch = await bcrypt.compare(password, user.password)
         if(hasmatch){
-            const jwttoken = jwt.sign(user.toJSON(), process.env.JWT_KEY, {expiresIn:180})
+            const jwttoken = jwt.sign(user.toJSON(), "12@g", {expiresIn:180})
             res.json({  
                 jwttoken,
                 user
@@ -44,7 +44,7 @@ router.post("/register", async (req, res)=>{
         const hashedpassword = await bcrypt.hash(password, 10)
         const user = new Usermodel({name, email, password : hashedpassword})
         const saveduser = await user.save()
-        const jwttoken = jwt.sign(user.toJSON(), process.env.JWT_KEY, {expiresIn: 10})
+        const jwttoken = jwt.sign(user.toJSON(), "12@g", {expiresIn: 10})
         res.json({
             jwttoken,
             user : saveduser
