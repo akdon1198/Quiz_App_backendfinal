@@ -10,15 +10,14 @@ app.use(cors())
 dotenv.config()
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
-mongoose.connect("mongodb+srv://akash:akash@cluster0.o8cde90.mongodb.net/Quizdatabase?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGO_URL)
 .then(() => {console.log("database connected");})
 .catch(() => {console.log("database not connected");})
 
 app.use("/api/auth", authRoute)
 app.use("/api/quiz", quizRoute)
 
-app.listen(5000, () => {
-    console.log("server running at 5000");
+const PORT = process.env.PORT || 5000
+app.listen(PORT, () => {
+    console.log(`server running at ${PORT}`);
 })
-
-// 123@guptaA

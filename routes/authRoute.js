@@ -33,6 +33,7 @@ router.post("/login", async (req, res) => {
 })
 
 router.post("/register", async (req, res)=>{
+    console.log("called");
     const {name, email, password} = req.body
     const alreadyuser = await Usermodel.findOne({email})
     if(alreadyuser){
